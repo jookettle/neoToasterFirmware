@@ -10,17 +10,26 @@ jobs:
     outputs:
       ok: ${{ steps.check.outcome }}
     steps:
+      - name: Debug branch context
+        run: |
+          echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME:-${{ github.event_name }}}"
+          echo "GITHUB_HEAD_REF=${GITHUB_HEAD_REF:-${{ github.head_ref }}}"
+          echo "GITHUB_REF=${GITHUB_REF:-${{ github.ref }}}"
+
       - name: Check branch name matches policy
         id: check
         run: |
+          set -euo pipefail
           BRANCH="${{ github.head_ref }}"
-          echo "Branch: $BRANCH"
-          REGEX='^(feat|fix|chore|docs|ci|refactor|test|perf|hotfix|release)\/[a-z0-9._-]+(?:-[a-z0-9._-]+)*$'
-          if [[ "$BRANCH" =~ $REGEX ]]; then
+          echo "Checking branch: '$BRANCH'"
+          REGEX='^(feat|fix|chore|docs|ci|refactor|test|perf|hotfix|release)/[a-z0-9._-]+(-[a-z0-9._-]+)*$'
+          echo "Using regex: $REGEX"
+          if echo "$BRANCH" | grep -E -q "$REGEX"; then
             echo "Branch name matches policy"
             exit 0
           else
             echo "ERROR: Branch name does not match required pattern: $REGEX"
+            echo "Branch variables: github.head_ref='${{ github.head_ref }}' github.ref='${{ github.ref }}'"
             echo "Please rename your branch to follow the convention: type/short-desc (e.g. feat/add-login)"
             exit 1
           fi
