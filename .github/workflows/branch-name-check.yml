@@ -1,0 +1,26 @@
+name: Branch Name Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    outputs:
+      ok: ${{ steps.check.outcome }}
+    steps:
+      - name: Check branch name matches policy
+        id: check
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          echo "Branch: $BRANCH"
+          REGEX='^(feat|fix|chore|docs|ci|refactor|test|perf|hotfix|release)\/[a-z0-9._-]+(?:-[a-z0-9._-]+)*$'
+          if [[ "$BRANCH" =~ $REGEX ]]; then
+            echo "Branch name matches policy"
+            exit 0
+          else
+            echo "ERROR: Branch name does not match required pattern: $REGEX"
+            echo "Please rename your branch to follow the convention: type/short-desc (e.g. feat/add-login)"
+            exit 1
+          fi

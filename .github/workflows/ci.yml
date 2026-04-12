@@ -1,0 +1,83 @@
+name: CI
+
+permissions:
+  pull-requests: write
+  contents: read
+
+on:
+  push:
+    branches: [main, master, chore/pin-lib-deps]
+  pull_request:
+    branches: [main, master, chore/pin-lib-deps]
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run clang-format
+        uses: DoozyX/clang-format-lint-action@v0.16
+        with:
+          source: '.'
+          extensions: 'cpp,h,hpp,c'
+          clangFormatVersion: 16
+          style: file
+          exclude: './.git ./.pio'
+
+      - name: Create PR with formatting
+        if: ${{ github.ref_name != 'main' && github.ref_name != 'master' }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: apply clang-format (CI)"
+          branch: "auto/clang-format-${{ github.sha }}"
+          title: "chore: apply clang-format"
+          body: "Automated clang-format changes by CI"
+          labels: "auto-format"
+
+  build:
+    name: Build Firmware
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [esp32dev, adafruit_matrixportal_esp32s3]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache PlatformIO & pip
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            ~/.platformio/.cache
+            .pio
+            ~/.cache/pip
+          key: ${{ runner.os }}-pio-${{ hashFiles('**/platformio.ini') }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+
+      - name: Show PlatformIO version
+        run: pio --version
+
+      - name: Build Environment
+        run: pio run -e ${{ matrix.env }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-${{ matrix.env }}
+          path: .pio/build/${{ matrix.env }}/

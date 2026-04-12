@@ -1,0 +1,41 @@
+name: PR Cleanup
+
+on:
+  schedule:
+    - cron: '0 3 * * 1' # 매주 월요일 03:00 UTC
+  workflow_dispatch: {}
+  pull_request:
+    types: [closed]
+
+jobs:
+  mark-stale:
+    name: Mark and Close Stale PRs
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Run stale action
+        uses: actions/stale@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          # PRs inactive for 30 days will be marked stale, closed after 7 more days
+          days-before-stale: 30
+          days-before-close: 7
+          stale-label: stale
+          exempt-labels: 'keep-open,WIP'
+          only-prs: true
+
+  delete-branch:
+    name: Delete Branch After Merged PR
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Delete branch that was merged
+        uses: peter-evans/delete-branch@v2
+        with:
+          branch: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
