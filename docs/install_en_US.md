@@ -1,3 +1,17 @@
+---
+title: Installation (EN)
+summary: This document explains how to install and build the project (English).
+last_modified: 2026-04-12
+---
+
+# Installation
+
+This document explains how to install and build the project (English).
+
+## Change History
+
+- 2026-04-12: Document header standardized and change history added (automated)
+1. Install [Visual Studio Code](https://code.visualstudio.com/Download) and [PlatformIO](https://platformio.org/install/ide?install=vscode).
 [한국어](install.md)
 [English](install_en_US.md)
 

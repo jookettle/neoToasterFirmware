@@ -1,5 +1,11 @@
 # Quick Start
 
+---
+title: Quick Start
+summary: 빠르게 펌웨어를 빌드하고 장치에 올리는 방법을 정리합니다.
+last_modified: 2026-04-12
+---
+
 이 문서는 빠르게 펌웨어를 빌드하고 장치에 올리는 방법을 정리합니다.
 
 전제조건
@@ -35,3 +41,7 @@ platformio run -e esp32dev -t upload
 - 라이선스 및 서드파티 목록: `THIRD_PARTY_LICENSES.md`
 
 문제가 발생하면 `CONTRIBUTING.md`를 참고하여 이슈를 열어 주세요.
+
+## Change History
+
+- 2026-04-12: 문서 헤더 표준화 및 변경 이력 추가 (자동)

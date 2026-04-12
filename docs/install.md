@@ -13,9 +13,19 @@ ESP32-S3는 USB CDC를 사용합니다. Windows 기준으로 기본 드라이버
 
 
 
-# 설정
-NeoToasterFirmware는 파일 시스템인 FFAT를 통해 데이터 파일을 Flash에 저장하여 사용합니다.
-`Upload Filesystem Image`를 할 때 `/data` 폴더의 모든 파일이 업로드 됩니다.
+# 설치
+
+---
+title: 설치
+summary: 프로젝트를 설치하고 빌드하는 방법을 설명합니다.
+last_modified: 2026-04-12
+---
+
+이 문서에서는 프로젝트를 설치하고 빌드하는 방법을 설명합니다.
+
+## Change History
+
+- 2026-04-12: 문서 헤더 표준화 및 변경 이력 추가 (자동)
 
 그 중 `config.yaml` 파일에서 대부분의 설정이 관리됩니다. 기본적으로 yaml의 문법을 따르나, 모든 기능이 포함되어 있지 않으므로 최대한 형식을 맞춰주세요.
 

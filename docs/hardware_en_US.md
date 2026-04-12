@@ -1,6 +1,12 @@
 [한국어](hardware.md)
 [English](hardware_en_US.md)
 
+---
+title: Hardware (EN)
+summary: Hardware requirements, pinouts, and optional components for NeoToaster firmware.
+last_modified: 2026-04-12
+---
+
 # Hardware
 Requirements
 - ESP32, ESP32-S3 (recommended)
@@ -182,3 +188,7 @@ This is a digital light sensor that supports light intensity measurement in LUX 
 
 ## CDS
 You can use a module type such as `KY-018` (not tested), or the circuit is simple, you can make it yourself using CDS and a 1k resistor.
+
+## Change History
+
+- 2026-04-12: Document header standardized and change history added (automated)

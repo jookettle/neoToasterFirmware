@@ -1,7 +1,13 @@
 # Issues and Priorities
 
+---
+title: Issues and Priorities
+summary: 레포지토리의 우선순위가 높은 이슈들과 권장 작업을 정리합니다.
+last_modified: 2026-04-12
+---
+
 간단 요약
-- 리포지토리를 스캔해 잠재적 문제와 개선 권장사항을 정리했습니다. 이미 CI 워크플로를 추가했고, 외부 라이선스 스냅샷을 수집하는 스크립트를 추가했습니다.
+- 레포지토리를 스캔해 잠재적 문제와 개선 권장사항을 정리했습니다. 이미 CI 워크플로를 추가했고, 외부 라이선스 스냅샷을 수집하는 스크립트를 추가했습니다.
 
 중요(즉시 조치 권장)
 - `platformio.ini`의 `lib_deps`가 버전/커밋으로 고정되어 있지 않음 — 빌드가 외부 라이브러리 변경에 민감해짐. 대응: 각 라이브러리를 `owner/repo#<tag|commit>` 또는 `owner/repo@<version>` 형태로 고정하고, CI에서 고정 검증(또는 `lib_deps.lock`)을 추가하세요.
@@ -28,3 +34,7 @@
 
 다음 단계 제안
 - 제가 자동으로 `platformio.ini`의 `lib_deps`에 대해 PR용 placeholder(각 항목에 `#<commit>` 표시) 파일을 생성해 드릴까요? 아니면 먼저 `THIRD_PARTY_LICENSES.md`에 전체 라이선스 텍스트를 병합할까요?
+
+## Change History
+
+- 2026-04-12: 문서 헤더 표준화 및 변경 이력 추가 (자동)

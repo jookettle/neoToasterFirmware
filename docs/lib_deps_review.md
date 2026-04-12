@@ -1,5 +1,11 @@
 # lib_deps 리뷰 및 권장 고정안
 
+---
+title: lib_deps 리뷰 및 권장 고정안
+summary: `platformio.ini`의 `lib_deps` 항목을 검토하고 의존성 고정 권장을 정리합니다.
+last_modified: 2026-04-12
+---
+
 다음은 현재 `platformio.ini`의 `lib_deps` 항목을 기반으로 한 검토 결과 및 권장 작업입니다.
 
 현재 `platformio.ini`의 `lib_deps` (요약):
@@ -47,5 +53,9 @@ https://github.com/jarzebski/Arduino-DS3231.git
 ```bash
 python3 scripts/check_third_party_licenses.py
 ```
+
+## Change History
+
+- 2026-04-12: 문서 헤더 표준화 및 변경 이력 추가 (자동)
 
 참고: 스크립트는 네트워크 접속을 필요로 하며, GitHub API 토큰을 사용하면 rate limit 우회가 가능합니다. 스크립트 사용 후 결과를 검토해 태그/커밋을 수동으로 고정하는 것을 권장합니다.
