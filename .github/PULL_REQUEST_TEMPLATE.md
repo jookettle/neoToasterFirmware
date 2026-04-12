@@ -1,3 +1,17 @@
+<!-- Please describe the change and why it is needed -->
+
+## Summary
+
+## Related issue
+- Fixes # (issue)
+
+## Testing
+- How to reproduce and test locally (PlatformIO env used)
+
+## Checklist
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my own code
+- [ ] I have updated the documentation where necessary
 <!-- 제목에 간단한 설명을 적어주세요 -->
 
 ## 변경 내용

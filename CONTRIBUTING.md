@@ -1,3 +1,33 @@
+# Contributing to NeoToasterFirmware
+
+감사합니다! 프로젝트에 기여해 주셔서 감사합니다. 아래 절차를 따라 주세요.
+
+## 브랜치 전략
+- 기능/개선: `feature/<short-description>`
+- 버그 수정: `fix/<short-description>`
+- 문서: `docs/<short-description>`
+
+PR은 기본적으로 `main`(또는 기본 브랜치)로 병합 요청합니다. 하나의 PR은 하나의 목적만 가지도록 해주세요.
+
+## 커밋 메시지
+- 요약은 짧고 영어/한국어 가능 (권장: 영어). 형식 예: `feat: add new config option` 또는 `fix: correct timing bug`
+
+## PR 템플릿
+PR에는 다음 항목을 포함해 주세요:
+- 변경 요약
+- 관련 이슈(#number)
+- 테스트 방법(로컬에서 빌드/동작 확인 방법)
+- 영향 범위(보드, 기능)
+
+## 코드 스타일과 검사
+- C++ 코딩 스타일은 기존 파일 스타일을 따릅니다.
+- 변경 후 `platformio run -e esp32dev`로 빌드 확인을 권장합니다.
+
+## 테스트
+- 하드웨어 의존 코드의 경우 가능한 한 추상화된 모듈 단위로 유닛 테스트를 추가해 주세요.
+
+## 연락 및 리뷰
+- 주요 변경은 PR에서 리뷰어(maintainer)를 지정해 주세요.
 # Contributing
 
 작은 변경이나 버그 리포트, 문서 개선 모두 환영합니다.
