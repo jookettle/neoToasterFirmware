@@ -30,8 +30,8 @@
 
 Explore the documentation to get your NeoToaster up and running:
 
-- [**Hardware Setup**](docs/hardware_en_US.md) – Wiring, pinmaps, and component requirements.
-- [**Installation**](docs/install_en_US.md) – Step-by-step guide to flashing your ESP32.
++ [**Hardware Setup**](docs/hardware-en-us.md) – Wiring, pinmaps, and component requirements.
++ [**Installation**](docs/install-en-us.md) – Step-by-step guide to flashing your ESP32.
 - [**Changelog**](CHANGELOG.md) – Tracking progress and latest updates.
 
 ---

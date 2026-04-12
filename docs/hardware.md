@@ -1,5 +1,5 @@
 [한국어](hardware.md)
-[English](hardware_en_US.md)
+[English](hardware-en-us.md)
 
 ---
 title: 하드웨어
@@ -84,7 +84,7 @@ WS2812B 등 NeoPixel을 사용하는 어떤 형태든 가능합니다. 이 부�
 ## V1
 저는 WS2812B LED 스트립을 이용해 만들었으며, 미터당 144개의 LED가 달린 제품을 사용했습니다.
 
-![side_panel.png](side_panel.png)
+![side-panel.png](side-panel.png)
 
 멀티컬러 3D 프린팅을 이용해서 만들었으며 도면은 아래 링크를 참고해주세요.
 

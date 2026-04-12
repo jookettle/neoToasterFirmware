@@ -19,7 +19,7 @@ last_modified: 2026-04-12
 - 테스트/품질: 단위/통합 테스트가 없음. PlatformIO `unity` 프레임워크 또는 호스트용 C++ 테스트(서브셋) 추가 권장.
 
 중간
-- 문서 보강: 하드웨어 요구사항(PSRAM 여부, 권장 보드), FFat/SD 업로드 예시, 릴리스 프로세스 문서화(FFat 이미지 만드는 방법). 일부 문서는 이미 추가했습니다(`docs/QUICK_START.md`, `CONTRIBUTING.md`).
+- 문서 보강: 하드웨어 요구사항(PSRAM 여부, 권장 보드), FFat/SD 업로드 예시, 릴리스 프로세스 문서화(FFat 이미지 만드는 방법). 일부 문서는 이미 추가했습니다(`docs/quick-start.md`, `CONTRIBUTING.md`).
 - 로깅·디버그: 시리얼·HUD 로그 레벨 및 원격 디버그 방법 문서화.
 
 낮음(추후)

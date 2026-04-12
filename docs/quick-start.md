@@ -37,7 +37,7 @@ platformio run -e esp32dev -t upload
 - FFat (내장 플래시): PlatformIO의 `uploadfs` 타겟(사용 가능한 경우) 또는 esptool 기반의 외부 스크립트 이용
 
 문서 및 추가 정보
-- 하드웨어/설치 세부사항: `docs/hardware.md`, `docs/install.md`, `docs/hardware_en_US.md`, `docs/install_en_US.md`
+- 하드웨어/설치 세부사항: `docs/hardware.md`, `docs/install.md`, `docs/hardware-en-us.md`, `docs/install-en-us.md`
 - 라이선스 및 서드파티 목록: `THIRD_PARTY_LICENSES.md`
 
 문제가 발생하면 `CONTRIBUTING.md`를 참고하여 이슈를 열어 주세요.

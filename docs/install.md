@@ -1,5 +1,5 @@
 [한국어](install.md)
-[English](install_en_US.md)
+[English](install-en-us.md)
 
 # 설치
 1. [Visual Studio Code](https://code.visualstudio.com/Download) 설치 후 [PlatformIO](https://platformio.org/install/ide?install=vscode)를 설치합니다.
