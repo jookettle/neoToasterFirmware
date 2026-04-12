@@ -1,0 +1,23 @@
+name: Dependabot Auto Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  automerge:
+    name: Auto-merge Dependabot PRs when checks pass
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Auto-merge when all checks pass
+        uses: pascalgn/automerge-action@v0.15.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          merge_method: squash
+          # only merge if all required status checks succeeded
+          check_run: 'success'
