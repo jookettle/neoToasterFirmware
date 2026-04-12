@@ -6,6 +6,14 @@
 
 1. 저장소 포크/클론
 2. 새 브랜치 생성: `git checkout -b fix/your-change`
+3. 브랜치 이름 규칙
+
+- 형식: `type/scope-or-short-desc`
+- 허용되는 타입: `feat`, `fix`, `chore`, `docs`, `ci`, `refactor`, `test`, `perf`, `hotfix`, `release`
+- 예시: `feat/ui-add-settings`, `fix/rtc-bug`, `chore/pinned-deps`, `docs/update-readme`
+- 권장 정규식: `^(feat|fix|chore|docs|ci|refactor|test|perf|hotfix|release)\/[a-z0-9._-]+(?:-[a-z0-9._-]+)*$`
+
+브랜치 이름은 위 규칙을 따르세요. 이 규칙은 PR 생성 시 자동으로 검사됩니다(규칙 미준수 시 체크 실패).
 3. 변경 및 로컬 빌드(아래 참고)
 4. 테스트 후 PR 생성
 
