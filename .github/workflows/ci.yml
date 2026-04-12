@@ -1,5 +1,8 @@
 name: CI
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [main, master, chore/pin-lib-deps]
@@ -13,6 +16,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run clang-format
         uses: DoozyX/clang-format-lint-action@v0.16
@@ -24,8 +30,26 @@ jobs:
           exclude: './.git ./.pio'
           inplace: 'true'
 
+      - name: Commit formatted code
+        if: ${{ always() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No formatting changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: apply clang-format (CI)"
+          BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          git push origin "HEAD:${BRANCH}"
+
   build:
     name: Build Firmware
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
