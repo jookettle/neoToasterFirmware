@@ -15,7 +15,9 @@ jobs:
         run: |
           BRANCH="${{ github.head_ref }}"
           echo "Branch: $BRANCH"
-          REGEX='^(feat|fix|chore|docs|ci|refactor|test|perf|hotfix|release)\/[a-z0-9._-]+(?:-[a-z0-9._-]+)*$'
+          # Allow both 'feat' and legacy 'feature' prefixes (some contributors used 'feature/*')
+          # Use bash-compatible regex (avoid non-capturing groups '?:')
+          REGEX='^(feat|feature|fix|chore|docs|ci|refactor|test|perf|hotfix|release)/[a-z0-9._-]+(-[a-z0-9._-]+)*$'
           if [[ "$BRANCH" =~ $REGEX ]]; then
             echo "Branch name matches policy"
             exit 0
