@@ -1,0 +1,32 @@
+name: Branch Protection Check
+
+on:
+  schedule:
+    - cron: '0 4 * * 1' # weekly on Monday 04:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  check-protection:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check protected branches
+        run: |
+          set -euo pipefail
+          REPO="${{ github.repository }}"
+          BRANCHES=(main master)
+          MISSING=()
+          for B in "${BRANCHES[@]}"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${REPO}/branches/${B}/protection") || true
+            if [ "$STATUS" != "200" ]; then
+              echo "Branch $B is not protected (HTTP $STATUS)"
+              MISSING+=("$B")
+            else
+              echo "Branch $B is protected"
+            fi
+          done
+          if [ ${#MISSING[@]} -ne 0 ]; then
+            echo "Unprotected branches: ${MISSING[*]}"
+            exit 1
+          fi

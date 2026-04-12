@@ -34,7 +34,39 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Debug branch info
+        run: |
+          echo "PR merged: ${{ github.event.pull_request.number }}"
+          echo "Head repo: ${{ github.event.pull_request.head.repo.full_name }}"
+          echo "Head ref: ${{ github.event.pull_request.head.ref }}"
+
+      - name: Check remote branch exists
+        id: check_branch
+        run: |
+          set -euo pipefail
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          REPO="${{ github.repository }}"
+          echo "Checking if branch '$BRANCH' exists in '$REPO'"
+          # Check branch existence
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${REPO}/git/refs/heads/${BRANCH}")
+          echo "HTTP status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" = "200" ]; then
+            echo "branch_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "branch_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check if branch is protected
+          PROT_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${REPO}/branches/${BRANCH}/protection")
+          echo "protection HTTP status: $PROT_STATUS"
+          if [ "$PROT_STATUS" = "200" ]; then
+            echo "branch_protected=true" >> $GITHUB_OUTPUT
+          else
+            echo "branch_protected=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Delete branch that was merged
+        if: steps.check_branch.outputs.branch_exists == 'true' && steps.check_branch.outputs.branch_protected == 'false'
         uses: peter-evans/delete-branch@v2
         with:
           branch: ${{ github.event.pull_request.head.ref }}
