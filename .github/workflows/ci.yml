@@ -14,6 +14,9 @@ jobs:
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,10 +33,11 @@ jobs:
           exclude: './.git ./.pio'
 
       - name: Create PR with formatting
-        if: ${{ github.ref_name != 'main' && github.ref_name != 'master' }}
+        if: ${{ (github.event_name == 'push' && github.ref_name != 'main' && github.ref_name != 'master') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) }}
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Use a PAT stored in repository secrets to allow creating branches/PRs from forks safely
+          token: ${{ secrets.FORMAT_PR_TOKEN }}
           commit-message: "chore: apply clang-format (CI)"
           branch: "auto/clang-format-${{ github.sha }}"
           title: "chore: apply clang-format"
