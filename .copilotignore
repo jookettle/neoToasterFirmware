@@ -1,0 +1,60 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python / virtualenv
+venv/
+.env
+*.pyc
+__pycache__/
+
+# Node / deps
+node_modules/
+
+# PlatformIO / build outputs
+.pio/
+.pioenvs/
+.pio/build/
+build/
+dist/
+
+# Firmware / binaries
+*.elf
+*.bin
+*.hex
+*.img
+*.zip
+
+# Logs / caches / coverage
+*.log
+.cache/
+coverage/
+
+# Secrets / keys / certs
+*.key
+*.pem
+*.crt
+secret*.yaml
+credentials.yaml
+*.env
+
+# Large assets / generated media (옵션: 필요한 경우만 포함)
+archive/
+archive/**
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.svg
+
+# Misc
+*.exe
+*.o
+*.obj
+
+# Project-specific (optional)
+# tf_8mb.csv  # uncomment to ignore if you don't want assets indexed
+# data/       # uncomment to ignore data folder
